@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+    discovery:
+        build: ./discovery
+        restart: always
+        container_name: discovery
+        hostname: discovery
+        ports:
+          - 8761:8761
+        environment:
+          EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://discovery:8761/eureka'
+    server:
+        build: ./server
+        restart: always
+        hostname: fileserviceserver1
+        deploy:
+          mode: replicated
+          replicas: 2
+        volumes:
+          - ./upload-dir:/upload-dir
+        environment:
+          EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://discovery:8761/eureka'
+          EUREKA_URI: 'http://discovery:8761/eureka'
+        depends_on:
+           - discovery
+    client:
+        build: ./client
+        restart: always
+        hostname: fileserviceclient
+        environment:
+          EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://discovery:8761/eureka'
+        depends_on:
+          - server

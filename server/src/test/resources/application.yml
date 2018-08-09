@@ -1,0 +1,5 @@
+eureka:
+  client:
+    enabled: false
+storage:
+  location: uploads

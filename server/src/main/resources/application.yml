@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: fileservice
+server:
+  port: ${PORT:8080}
+eureka:
+  client:
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+  instance:
+    preferIpAddress: true
+logging:
+  file: logs/application.log
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    de.exb.platform: INFO
+storage:
+  location: uploads

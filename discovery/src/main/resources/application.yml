@@ -1,0 +1,16 @@
+server:
+  port: ${PORT:8761}
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    server:
+      waitTimeInMsWhenSyncEmpty: 0
+
+logging:
+  file: logs/application.log
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    de.exb.platform: INFO

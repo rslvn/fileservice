@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.3.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<groupId>de.exb.platform.cloud.fileservice</groupId>
+	<artifactId>fileservice-parent</artifactId>
+	<version>1.0</version>
+
+	<packaging>pom</packaging>
+
+	<name>File Service: Parent</name>
+
+	<organization>
+		<name>ExB Research &amp; Development GmbH</name>
+		<url>http://www.exb.de</url>
+	</organization>
+
+	<modules>
+		<module>api</module>
+		<module>client</module>
+		<module>server</module>
+		<module>discovery</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java-version>1.8</java-version>
+
+		<junit-version>4.12</junit-version>
+		<mockito-version>1.10.19</mockito-version>
+		<eureka-version>2.0.0.RELEASE</eureka-version>
+		<feign.form.version>3.3.0</feign.form.version>
+
+		<maven-jar-plugin-version>2.5</maven-jar-plugin-version>
+		<maven-compiler-plugin-version>3.1</maven-compiler-plugin-version>
+		<maven-resources-plugin-version>2.6</maven-resources-plugin-version>
+		<maven-surefire-plugin-version>2.17</maven-surefire-plugin-version>
+		<maven-failsafe-plugin-version>2.17</maven-failsafe-plugin-version>
+		<maven-source-plugin-version>2.3</maven-source-plugin-version>
+		<maven-javadoc-plugin-version>2.9.1</maven-javadoc-plugin-version>
+		<umlgraph-version>5.6</umlgraph-version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.exb.platform.cloud.fileservice</groupId>
+				<artifactId>fileservice-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit-version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito-version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin-version}</version>
+					<configuration>
+						<source>${java-version}</source>
+						<target>${java-version}</target>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+						<compilerArgument>-Xlint:unchecked</compilerArgument>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin-version}</version>
+					<configuration>
+						<excludes>
+							<exclude>**/.gitignore</exclude>
+						</excludes>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin-version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin-version}</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin-version}</version>
+					<configuration>
+						<skip>false</skip>
+						<forkCount>1</forkCount>
+						<reuseForks>false</reuseForks>
+						<redirectTestOutputToFile>false</redirectTestOutputToFile>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin-version}</version>
+					<configuration>
+						<skip>false</skip>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<forkMode>pertest</forkMode>
+					</configuration>
+					<executions>
+						<execution>
+							<id>integration-test</id>
+							<goals>
+								<goal>integration-test</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>verify</id>
+							<goals>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin-version}</version>
+					<configuration>
+						<skip>false</skip>
+						<links>
+							<link>http://docs.oracle.com/javase/8/docs/api/</link>
+							<link>http://docs.oracle.com/javaee/7/api/</link>
+							<link>http://www.slf4j.org/api/</link>
+						</links>
+						<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+						<docletArtifact>
+							<groupId>org.umlgraph</groupId>
+							<artifactId>umlgraph</artifactId>
+							<version>${umlgraph-version}</version>
+						</docletArtifact>
+						<linksource>false</linksource>
+						<show>protected</show>
+						<additionalparam>-all -constructors</additionalparam>
+						<useStandardDocletOptions>true</useStandardDocletOptions>
+						<finalName>${project.artifactId}-${project.version}</finalName>
+					</configuration>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<phase>package</phase>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

@@ -1,0 +1,15 @@
+.idea/
+.settings/
+*.iml
+.classpath
+.factorypath
+.project
+.springBeans
+*.txt
+logs/
+.apt_generated/
+.apt_generated_tests/
+target/
+
+
+

@@ -1,0 +1,13 @@
+.idea/
+.settings/
+*.iml
+.classpath
+.factorypath
+.project
+logs/
+.apt_generated/
+.apt_generated_tests/
+target/
+
+
+
