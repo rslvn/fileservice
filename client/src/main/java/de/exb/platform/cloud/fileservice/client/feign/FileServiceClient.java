@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.base.Preconditions;
+
 import de.exb.platform.cloud.fileservice.api.Constants;
 import feign.Headers;
 import feign.codec.Decoder;
@@ -146,9 +148,7 @@ public interface FileServiceClient {
 		private final byte[] payload;
 
 		public InternalMultipartFile(String name, String originalFileName, String contentType, byte[] payload) {
-			if (payload == null) {
-				throw new IllegalArgumentException("Payload cannot be null.");
-			}
+			Preconditions.checkArgument(payload != null, "Payload cannot be null.");
 			this.name = name;
 			this.originalFileName = originalFileName;
 			this.contentType = contentType;
