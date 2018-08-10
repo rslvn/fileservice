@@ -1,5 +1,6 @@
 
 # docker
+[![CircleCI](https://circleci.com/gh/rslvn/fileservice.svg?style=svg)](https://circleci.com/gh/rslvn/fileservice)
 [![Build Status](https://travis-ci.com/rslvn/fileservice.svg?branch=master)](https://travis-ci.com/rslvn/fileservice)
 [![Coverage Status](https://coveralls.io/repos/github/rslvn/fileservice/badge.svg?branch=master)](https://coveralls.io/github/rslvn/fileservice?branch=master)
 ## manage images and containers
