@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = FileServiceClientApplication.class)
-public class FileServiceClientApplicationTests {
+public class FileServiceClientApplicationTest {
 
 	@Autowired
 	private FileServiceClient fileServiceClient;

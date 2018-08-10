@@ -39,7 +39,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  *
  */
 @RunWith(SpringRunner.class)
-public class FileServiceClientControllerTests {
+public class FileServiceClientControllerTest {
 
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 

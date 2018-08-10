@@ -48,9 +48,9 @@ import de.exb.platform.cloud.fileservice.api.Constants;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = { "feign.hystrix.enabled=true" })
-@ContextConfiguration(classes = { FileServiceClientTests.LocalRibbonClientConfiguration.class })
+@ContextConfiguration(classes = { FileServiceClientTest.LocalRibbonClientConfiguration.class })
 @EnableFeignClients(clients = FileServiceClient.class)
-public class FileServiceClientTests {
+public class FileServiceClientTest {
 
 	@ClassRule
 	public static WireMockClassRule wiremock = new WireMockClassRule(wireMockConfig().dynamicPort());

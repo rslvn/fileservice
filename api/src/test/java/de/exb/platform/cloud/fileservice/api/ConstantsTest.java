@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author resulav
  *
  */
-public class ConstantsTests {
+public class ConstantsTest {
 
 	@Test
 	public void testConstructor() {
