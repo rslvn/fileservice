@@ -8,12 +8,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +41,24 @@ public class FileServiceControllerIT {
 	@Autowired
 	private MockMvc mvc;
 
-    /**
-     * This test creates a folder and a file under the folder for some test cases.
-     * The test is different from @Before, because we want to run this step one time in a test execution duration.
-     *
-     * @throws Exception
-     */
+	@BeforeClass
+	public static void setup() throws IOException {
+		TestUtility.createUploadStructure();
+	}
+
+	@AfterClass
+	public static void teardown() throws IOException {
+		TestUtility.deleteUploadFolder();
+	}
+
+	/**
+	 * This test creates a folder and a file under the folder for some test cases.
+	 * The test is different from @Before, because we want to run this step one time
+	 * in a test execution duration.
+	 *
+	 * @throws Exception
+	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void firstTest() throws Exception {
 		MvcResult result = mvc.perform(
@@ -57,15 +68,15 @@ public class FileServiceControllerIT {
 		List<String> list = TestUtility.toStringList(result.getResponse().getContentAsString());
 		Assert.assertNotNull("result is null", list);
 
-		if(list.contains(TestUtility.EXIST_FILE)){
+		if (list.contains(TestUtility.EXIST_FILE)) {
 			return;
 		}
 
-        MockMultipartFile multipartFile = new MockMultipartFile("file", TestUtility.EXIST_FILE, "text/plain",
-                "Spring Framework".getBytes());
+		MockMultipartFile multipartFile = new MockMultipartFile("file", TestUtility.EXIST_FILE, "text/plain",
+				"Spring Framework".getBytes());
 
-        this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
-                .andExpect(status().isOk());
+		this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+				.file(multipartFile)).andExpect(status().isOk());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -74,8 +85,8 @@ public class FileServiceControllerIT {
 		MockMultipartFile multipartFile = new MockMultipartFile("file", TestUtility.FILE_UPLOAD, "text/plain",
 				"Spring Framework".getBytes());
 
-		this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
-				.andExpect(status().isOk());
+		this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+				.file(multipartFile)).andExpect(status().isOk());
 
 		MvcResult result = mvc.perform(
 				get(String.format("%s/%s", Constants.API_FILECONTROLLER, ".")).contentType(MediaType.APPLICATION_JSON))
@@ -99,8 +110,8 @@ public class FileServiceControllerIT {
 				String.format("%s/%s", TestUtility.TEST_FOLDER, TestUtility.FILE_UPLOAD), "text/plain",
 				"Spring Framework".getBytes());
 
-		this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
-				.andExpect(status().isOk());
+		this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+				.file(multipartFile)).andExpect(status().isOk());
 
 		MvcResult result = mvc
 				.perform(get(String.format("%s/%s", Constants.API_FILECONTROLLER, TestUtility.TEST_FOLDER))
@@ -109,7 +120,8 @@ public class FileServiceControllerIT {
 
 		List<String> list = TestUtility.toStringList(result.getResponse().getContentAsString());
 		Assert.assertNotNull("result is null", list);
-		Assert.assertTrue("result is empty", list.contains(String.format("%s/%s", TestUtility.TEST_FOLDER, TestUtility.FILE_UPLOAD)));
+		Assert.assertTrue("result is empty",
+				list.contains(String.format("%s/%s", TestUtility.TEST_FOLDER, TestUtility.FILE_UPLOAD)));
 
 		this.mvc.perform(delete(String.format("%s/%s/%s", Constants.API_FILECONTROLLER,
 				URLEncoder.encode(String.format("%s/%s", TestUtility.TEST_FOLDER, TestUtility.FILE_UPLOAD), "UTF-8"),
@@ -154,10 +166,10 @@ public class FileServiceControllerIT {
 		MockMultipartFile multipartFile = new MockMultipartFile("file", "../test.txt", "text/plain",
 				"Spring Framework".getBytes());
 
-		this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
-				.andExpect(status().isBadRequest());
+		this.mvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+				.file(multipartFile)).andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
 	public void testReadBadRequest() throws Exception {
 		mvc.perform(get(String.format("%s/%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_DOWNLOAD,
