@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
 
@@ -182,7 +183,7 @@ public class FileServiceControllerTest {
 	@Test
 	public void testRead() throws Exception {
 		Mockito.when(fileService.openForReading(Mockito.any(String.class), ArgumentMatchers.eq(TestUtility.EXIST_FILE)))
-				.thenReturn(new FileInputStream("upload-dir/test/sample.txt"));
+				.thenReturn(new ByteArrayInputStream("some content".getBytes()));
 		mockMvc.perform(get(String.format("%s/%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_DOWNLOAD,
 				URLEncoder.encode(TestUtility.EXIST_FILE, "UTF-8"))).contentType(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk());
