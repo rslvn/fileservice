@@ -79,19 +79,6 @@ public class FileServiceClientTest {
 		fileServiceClient.deleteFile("test", false);
 	}
 
-//	@Test
-//	public void testUploadFile() throws JsonProcessingException {
-//		stubFor(post(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
-//				.withHeader("Content-Type", matching("^multipart/form-data(; .*)?"))
-//				.withMultipartRequestBody(aMultipart().withName("file"))
-//				.willReturn(aResponse().withBody("Spring Framework")));
-//
-//		MultipartFile multipartFile = new MockMultipartFile("file", "test.txt", "text/plain",
-//				"Spring Framework".getBytes());
-//
-//		fileServiceClient.uploadFile(multipartFile);
-//	}
-
 	@Test
 	public void testDownloadFile() throws JsonProcessingException {
 		stubFor(get(urlEqualTo(

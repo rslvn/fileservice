@@ -1,10 +1,11 @@
 package de.exb.platform.cloud.fileservice.client;
 
-import de.exb.platform.cloud.fileservice.client.feign.FileServiceClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+
+import de.exb.platform.cloud.fileservice.client.feign.FileServiceClient;
 
 /**
  * Main of app
@@ -14,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients(clients={FileServiceClient.class})
+@EnableFeignClients(clients = { FileServiceClient.class })
 public class FileServiceClientApplication {
 
 	/**

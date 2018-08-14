@@ -17,13 +17,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * @author resulav
  *
  */
-@Slf4j
 public class TestUtility {
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	private static final TypeFactory TYPE_FACTORY = MAPPER.getTypeFactory();

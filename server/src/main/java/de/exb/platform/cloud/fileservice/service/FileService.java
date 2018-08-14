@@ -19,8 +19,8 @@ public interface FileService {
 	 * creates a writable stream for file
 	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param aPath the file path
-	 * @param aAppend append enabled or no
+	 * @param aPath      the file path
+	 * @param aAppend    append enabled or no
 	 * @return a writable stream
 	 * @throws FileServiceException as generic service exception
 	 */
@@ -32,7 +32,7 @@ public interface FileService {
 	 * creates a readable stream for file
 	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param aPath the file path
+	 * @param aPath      the file path
 	 * @return a readable stream
 	 * @throws FileServiceException as generic service exception
 	 */
@@ -40,7 +40,9 @@ public interface FileService {
 	InputStream openForReading(@NotNull final String aSessionId, @NotNull final String aPath)
 			throws FileServiceException;
 
-	/** returns a file's content size
+	/**
+	 * returns a file's content size
+	 * 
 	 * @param aPath the file path
 	 * @return size of content
 	 * @throws FileServiceException as generic service exception
@@ -48,9 +50,11 @@ public interface FileService {
 	@NotNull
 	long getLength(@NotNull final String aPath) throws FileServiceException;
 
-	/** retrieves file list under a folder
+	/**
+	 * retrieves file list under a folder
+	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param aPath the folder path
+	 * @param aPath      the folder path
 	 * @return a stream of file path
 	 * @throws FileServiceException as generic service exception
 	 */
@@ -61,7 +65,7 @@ public interface FileService {
 	 * retrieves file list under a folder
 	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param aPath aPath the folder path
+	 * @param aPath      aPath the folder path
 	 * @return a stream of file path
 	 * @throws FileServiceException as generic service exception
 	 */
@@ -72,7 +76,7 @@ public interface FileService {
 	 * deletes files or folder
 	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param aPath the file or folder path
+	 * @param aPath      the file or folder path
 	 * @param aRecursive delete recursive or no
 	 * @throws FileServiceException as generic service exception
 	 */
@@ -83,7 +87,7 @@ public interface FileService {
 	 * returns a file or folder's existing information
 	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param aPath the file or folder path
+	 * @param aPath      the file or folder path
 	 * @return true if exist, false if not exist
 	 * @throws FileServiceException as generic service exception
 	 */
@@ -91,8 +95,9 @@ public interface FileService {
 
 	/**
 	 * returns a file or folder's parent path
+	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param aPath the file or folder path
+	 * @param aPath      the file or folder path
 	 * @return the parent path
 	 * @throws FileServiceException as generic service exception
 	 */
@@ -102,7 +107,7 @@ public interface FileService {
 	 * saves a file to file system
 	 * 
 	 * @param aSessionId the HTTP request sessionId
-	 * @param file the file path
+	 * @param file       the file path
 	 * @throws FileServiceException as generic service exception
 	 */
 	void store(@NotNull final String aSessionId, @NotNull final MultipartFile file) throws FileServiceException;
