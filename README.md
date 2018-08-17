@@ -1,103 +1,110 @@
+# fileservice
 
-# docker
 [![CircleCI](https://circleci.com/gh/rslvn/fileservice.svg?style=svg)](https://circleci.com/gh/rslvn/fileservice)
 [![Build Status](https://travis-ci.com/rslvn/fileservice.svg?branch=master)](https://travis-ci.com/rslvn/fileservice)
 [![Coverage Status](https://coveralls.io/repos/github/rslvn/fileservice/badge.svg?branch=master)](https://coveralls.io/github/rslvn/fileservice?branch=master)
-## manage images and containers
+
+## microservices
+### discovery server
+[http://localhost:8761/](http://localhost:8761/)
+
+## docker
+
+### manage images and containers
 ```
 docker-compose build
 docker-compose down
 docker-compose up -d
 ```
 
-## container IPs
+### container IPs
 ```
 docker network inspect fileservice_default
 ```
 
-## connect containers
+### connect containers
 
 ```
 ~$ docker exec -it fileservice_discovery /bin/sh
-# tail -f logs/application.log 
+#tail -f logs/application.log 
 
 ```
 
 ```
 ~$ docker exec -it fileservice_server_1 /bin/sh
-# tail -f logs/application.log 
+#tail -f logs/application.log 
 
 ```
 
 ```
 ~$ docker exec -it fileservice_client_1 /bin/sh
-# tail -f logs/application.log 
+#tail -f logs/application.log 
 
 ```
 
-# server
+## server
 
-upload a file
+-upload a file
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test.out;filename=test.out" \
-        http://192.168.80.3:8080/api/v1/files/upload
+        http://172.21.0.3:8080/api/v1/files/upload
 ```
 
-upload a file with folder structure
+-upload a file with folder structure
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test/test.out;filename=test/test.out" \
-        http://192.168.80.3:8080/api/v1/files/upload
+        http://172.21.0.3:8080/api/v1/files/upload
 ```
 
-download a file
+-download a file
 ```
 curl -i -X GET \
-        http://192.168.80.3:8080/api/v1/files/download/test.out
+        http://172.21.0.3:8080/api/v1/files/download/test.out
 ```
 
-list files
+-list files
 ```
 # folder
 curl -i -X GET -H "Content-Type: application/json" \
-            "http://192.168.80.3:8080/api/v1/files/test"
+            "http://172.21.0.3:8080/api/v1/files/test"
 # file            
 curl -i -X GET -H "Content-Type: application/json" \
-            "http://192.168.80.3:8080/api/v1/files/test.out"
+            "http://172.21.0.3:8080/api/v1/files/test.out"
 ```
 
-delete file or folder
+-delete file or folder
 ```
 # file
 curl -i -X DELETE \
-        http://192.168.80.3:8080/api/v1/files/test.out/false
+        http://172.21.0.3:8080/api/v1/files/test.out/false
 ```
 
 
-# client
+## client
 
-upload a file
+-upload a file
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test.out;filename=test.out" \
         http://172.21.0.4:8090/api/v1/files/client/upload
 ```
 
-upload a file with folder structure
+-upload a file with folder structure
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test/test.out;filename=test/test.out" \
         http://172.21.0.4:8090/api/v1/files/client/upload
 ```
 
-download a file
+-download a file
 ```
 curl -i -X GET \
         http://172.21.0.4:8090/api/v1/files/client/download/test.out
 ```
 
-list files
+-list files
 ```
 # folder
 curl -i -X GET -H "Content-Type: application/json" \
@@ -107,7 +114,7 @@ curl -i -X GET -H "Content-Type: application/json" \
             "http://172.21.0.4:8090/api/v1/files/client/test.out"
 ```
 
-delete file or folder
+-delete file or folder
 ```
 # file
 curl -i -X DELETE \
