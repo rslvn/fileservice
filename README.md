@@ -12,26 +12,26 @@ docker-compose up -d
 
 ## container IPs
 ```
-docker network inspect spring-fileservice-demo-project_default
+docker network inspect fileservice_default
 ```
 
 ## connect containers
 
 ```
-~$ docker exec -it discovery /bin/sh
-/ # tail -f logs/application.log 
+~$ docker exec -it fileservice_discovery /bin/sh
+# tail -f logs/application.log 
 
 ```
 
 ```
-~$ docker exec -it spring-fileservice-demo-project_server_1 /bin/sh
-/ # tail -f logs/application.log 
+~$ docker exec -it fileservice_server_1 /bin/sh
+# tail -f logs/application.log 
 
 ```
 
 ```
-~$ docker exec -it spring-fileservice-demo-project_client_1 /bin/sh
-/ # tail -f logs/application.log 
+~$ docker exec -it fileservice_client_1 /bin/sh
+# tail -f logs/application.log 
 
 ```
 
@@ -41,37 +41,37 @@ upload a file
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test.out;filename=test.out" \
-        http://172.21.0.3:8080/api/v1/files/upload
+        http://192.168.80.3:8080/api/v1/files/upload
 ```
 
 upload a file with folder structure
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test/test.out;filename=test/test.out" \
-        http://172.21.0.3:8080/api/v1/files/upload
+        http://192.168.80.3:8080/api/v1/files/upload
 ```
 
 download a file
 ```
 curl -i -X GET \
-        http://172.21.0.3:8080/api/v1/files/download/test.out
+        http://192.168.80.3:8080/api/v1/files/download/test.out
 ```
 
 list files
 ```
 # folder
 curl -i -X GET -H "Content-Type: application/json" \
-            "http://172.21.0.3:8080/api/v1/files/test"
+            "http://192.168.80.3:8080/api/v1/files/test"
 # file            
 curl -i -X GET -H "Content-Type: application/json" \
-            "http://172.21.0.3:8080/api/v1/files/test.out"
+            "http://192.168.80.3:8080/api/v1/files/test.out"
 ```
 
 delete file or folder
 ```
 # file
 curl -i -X DELETE \
-        http://172.21.0.3:8080/api/v1/files/test.out/false
+        http://192.168.80.3:8080/api/v1/files/test.out/false
 ```
 
 

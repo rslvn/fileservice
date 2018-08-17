@@ -21,28 +21,29 @@ public class InternalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	protected void handleConflict(RuntimeException e) {
-		log.error("HttpStatus.BAD_REQUEST",e);
+		log.error("HttpStatus.BAD_REQUEST", e);
 	}
 
 	/**
-	 *  handles HTTP conflict case
+	 * handles HTTP conflict case
 	 * 
 	 * @param e the exception as cause
 	 */
 	@ExceptionHandler(FileServiceException.class)
 	@ResponseStatus(HttpStatus.CONFLICT)
 	protected void handleConflict(FileServiceException e) {
-		log.error("HttpStatus.CONFLICT",e);
+		log.error("HttpStatus.CONFLICT", e);
 	}
 
 	/**
-	 *  handles HTTP internal error case
+	 * handles HTTP internal error case
+	 * 
 	 * @param e the exception as cause
 	 */
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	protected void handle(Exception e) {
-		log.error("HttpStatus.INTERNAL_SERVER_ERROR",e);
+		log.error("HttpStatus.INTERNAL_SERVER_ERROR", e);
 	}
 
 }

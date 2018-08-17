@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.net.URLEncoder;
 
 import org.junit.Assert;
@@ -63,7 +62,9 @@ public class FileServiceControllerTest {
 		MockMultipartFile multipartFile = new MockMultipartFile("file", TestUtility.FILE_UPLOAD, "text/plain",
 				"Spring Framework".getBytes());
 
-		this.mockMvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
+		this.mockMvc
+				.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+						.file(multipartFile))
 				.andExpect(status().isOk());
 	}
 
@@ -76,7 +77,9 @@ public class FileServiceControllerTest {
 		Mockito.doThrow(new FileServiceException("Dummy FileServiceException")).when(fileService)
 				.store(Mockito.anyString(), Mockito.eq(multipartFile));
 
-		this.mockMvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
+		this.mockMvc
+				.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+						.file(multipartFile))
 				.andExpect(status().isConflict());
 	}
 
@@ -89,7 +92,9 @@ public class FileServiceControllerTest {
 		Mockito.doThrow(new IllegalArgumentException("Dummy IllegalArgumentException")).when(fileService)
 				.store(Mockito.anyString(), Mockito.eq(multipartFile));
 
-		this.mockMvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
+		this.mockMvc
+				.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+						.file(multipartFile))
 				.andExpect(status().isBadRequest());
 	}
 
@@ -102,7 +107,9 @@ public class FileServiceControllerTest {
 		Mockito.doThrow(new RuntimeException("Dummy exception")).when(fileService).store(Mockito.anyString(),
 				Mockito.eq(multipartFile));
 
-		this.mockMvc.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER,Constants.API_METHOD_UPLOAD)).file(multipartFile))
+		this.mockMvc
+				.perform(fileUpload(String.format("%s/%s", Constants.API_FILECONTROLLER, Constants.API_METHOD_UPLOAD))
+						.file(multipartFile))
 				.andExpect(status().isInternalServerError());
 	}
 

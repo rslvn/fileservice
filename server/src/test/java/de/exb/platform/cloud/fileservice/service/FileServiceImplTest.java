@@ -9,8 +9,8 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,23 +32,22 @@ import de.exb.platform.cloud.fileservice.properties.StorageProperties;
 @SpringBootTest
 public class FileServiceImplTest {
 
-    @Autowired
+	@Autowired
 	private FileServiceImpl fileService;
 
 	private final String sessionId = "dummySessionId";
 
-    @Autowired
-    public StorageProperties properties;
+	@Autowired
+	public StorageProperties properties;
 
-    @Before
-	public void setup() throws IOException {
-        if(fileService.exists("setupSession",TestUtility.EXIST_FILE)){
-            return;
-        }
+	@BeforeClass
+	public static void setup() throws IOException {
+		TestUtility.createUploadStructure();
+	}
 
-        MockMultipartFile multipartFile = new MockMultipartFile("file", TestUtility.EXIST_FILE, "text/plain",
-                "Spring Framework".getBytes());
-        fileService.store("setupSession",multipartFile);
+	@AfterClass
+	public static void teardown() throws IOException {
+		TestUtility.deleteUploadFolder();
 	}
 
 	// list CASES
@@ -78,7 +77,7 @@ public class FileServiceImplTest {
 	public void testListNotExist() throws FileServiceException {
 		Stream<Path> stream = fileService.list(sessionId, "notExist");
 		Assert.assertTrue("stream can not be null", stream != null);
-		Assert.assertTrue("stream empty", stream.count()==0);
+		Assert.assertTrue("stream empty", stream.count() == 0);
 	}
 
 	// listFiles CASES
@@ -141,7 +140,7 @@ public class FileServiceImplTest {
 	// store CASES
 	@Test
 	public void testStore() throws FileServiceException {
-        MockMultipartFile multipartFile = new MockMultipartFile("file", TestUtility.FILE_UPLOAD, "text/plain",
+		MockMultipartFile multipartFile = new MockMultipartFile("file", TestUtility.FILE_UPLOAD, "text/plain",
 				"Spring Framework".getBytes());
 		fileService.store(sessionId, multipartFile);
 		Assert.assertTrue("store unsuccessful", fileService.exists(sessionId, TestUtility.FILE_UPLOAD));
@@ -177,7 +176,7 @@ public class FileServiceImplTest {
 	// exist CASES
 	@Test
 	public void testExist() throws FileServiceException {
-		Assert.assertTrue("store unsuccessful", fileService.exists(sessionId, TestUtility.EXIST_FILE));
+		Assert.assertTrue("file not exist", fileService.exists(sessionId, TestUtility.EXIST_FILE));
 	}
 
 	@Test

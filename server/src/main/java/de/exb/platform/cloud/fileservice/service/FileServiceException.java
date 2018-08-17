@@ -24,7 +24,7 @@ public class FileServiceException extends IOException {
 	/**
 	 * constructor for situation with cause
 	 * 
-	 * @param aMessage situation message
+	 * @param aMessage   situation message
 	 * @param aThrowable the cause
 	 */
 	public FileServiceException(final String aMessage, final Throwable aThrowable) {

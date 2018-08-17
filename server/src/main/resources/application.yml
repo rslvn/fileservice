@@ -8,7 +8,7 @@ eureka:
     fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://fileservicediscovery:8761/eureka/
   instance:
     preferIpAddress: true
 logging:

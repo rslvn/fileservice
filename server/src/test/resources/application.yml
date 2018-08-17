@@ -2,4 +2,4 @@ eureka:
   client:
     enabled: false
 storage:
-  location: uploads
+  location: uploads-test

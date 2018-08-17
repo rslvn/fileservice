@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -78,7 +78,7 @@ public class FileServiceClientController {
 	 */
 	@SneakyThrows
 	@RequestMapping(value = Constants.API_METHOD_UPLOAD, method = RequestMethod.POST)
-	public void upload(@RequestParam("file") MultipartFile file) {
+	public void upload(@RequestPart("file") MultipartFile file) {
 		log.info("{} is called for {}", Constants.API_CLIENT_FILECONTROLLER, "upload");
 		fileServiceClient.uploadFile(file);
 	}

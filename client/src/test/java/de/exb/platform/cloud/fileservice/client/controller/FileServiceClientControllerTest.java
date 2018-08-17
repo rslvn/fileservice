@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.io.IOException;
 import java.net.URLEncoder;
 
-import de.exb.platform.cloud.fileservice.client.feign.FileServiceClient;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 
 import de.exb.platform.cloud.fileservice.api.Constants;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import de.exb.platform.cloud.fileservice.client.feign.FileServiceClient;
 
 /**
  * @author resulav
