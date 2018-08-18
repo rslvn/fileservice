@@ -78,27 +78,27 @@ or
 
 ## server
 
--upload a file
+- upload a file
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test.out;filename=test.out" \
         http://172.21.0.3:8080/api/v1/files/upload
 ```
 
--upload a file with folder structure
+- upload a file with folder structure
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test/test.out;filename=test/test.out" \
         http://172.21.0.3:8080/api/v1/files/upload
 ```
 
--download a file
+- download a file
 ```
 curl -i -X GET \
         http://172.21.0.3:8080/api/v1/files/download/test.out
 ```
 
--list files
+- list files
 ```
 # folder
 curl -i -X GET -H "Content-Type: application/json" \
@@ -108,7 +108,7 @@ curl -i -X GET -H "Content-Type: application/json" \
             "http://172.21.0.3:8080/api/v1/files/test.out"
 ```
 
--delete file or folder
+- delete file or folder
 ```
 # file
 curl -i -X DELETE \
@@ -118,27 +118,27 @@ curl -i -X DELETE \
 
 ## client
 
--upload a file
+- upload a file
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test.out;filename=test.out" \
         http://172.21.0.4:8090/api/v1/files/client/upload
 ```
 
--upload a file with folder structure
+- upload a file with folder structure
 ```
 curl -i -X POST -H "Content-Type: multipart/form-data" \
         -F "file=@test/test.out;filename=test/test.out" \
         http://172.21.0.4:8090/api/v1/files/client/upload
 ```
 
--download a file
+- download a file
 ```
 curl -i -X GET \
         http://172.21.0.4:8090/api/v1/files/client/download/test.out
 ```
 
--list files
+- list files
 ```
 # folder
 curl -i -X GET -H "Content-Type: application/json" \
@@ -148,7 +148,7 @@ curl -i -X GET -H "Content-Type: application/json" \
             "http://172.21.0.4:8090/api/v1/files/client/test.out"
 ```
 
--delete file or folder
+- delete file or folder
 ```
 # file
 curl -i -X DELETE \
