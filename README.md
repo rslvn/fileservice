@@ -5,6 +5,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/rslvn/fileservice/badge.svg?branch=master)](https://coveralls.io/github/rslvn/fileservice?branch=master)
 
 ## microservices
+
+File Service Overview:
+
+![FileServiceOverview](FileServiceOverview.png)
+
 ### discovery server
 [http://localhost:8761/](http://localhost:8761/)
 
@@ -17,26 +22,49 @@ docker-compose down
 docker-compose up -d
 ```
 
+### scale server container
+```
+docker-compose scale server=3
+```
+
 ### container IPs
 ```
 docker network inspect fileservice_default
 ```
 
-### connect containers
+or
 
 ```
-~$ docker exec -it fileservice_discovery /bin/sh
+docker exec -it fileservicediscovery ifconfig
+
+docker exec -it fileservice_server_1 ifconfig
+docker exec -it fileservice_server_2 ifconfig
+docker exec -it fileservice_server_3 ifconfig
+
+docker exec -it fileservice_client_1 ifconfig
+```
+
+### docker logs
+```
+docker-compose logs -f
+```
+or 
+
+```
+~$ docker exec -it fileservicediscovery /bin/sh
 #tail -f logs/application.log 
 
-```
 
-```
 ~$ docker exec -it fileservice_server_1 /bin/sh
 #tail -f logs/application.log 
 
-```
+~$ docker exec -it fileservice_server_2 /bin/sh
+#tail -f logs/application.log 
 
-```
+~$ docker exec -it fileservice_server_3 /bin/sh
+#tail -f logs/application.log 
+
+
 ~$ docker exec -it fileservice_client_1 /bin/sh
 #tail -f logs/application.log 
 
