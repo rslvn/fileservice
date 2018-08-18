@@ -4,6 +4,12 @@
 [![Build Status](https://travis-ci.com/rslvn/fileservice.svg?branch=master)](https://travis-ci.com/rslvn/fileservice)
 [![Coverage Status](https://coveralls.io/repos/github/rslvn/fileservice/badge.svg?branch=master)](https://coveralls.io/github/rslvn/fileservice?branch=master)
 
+## Artifacts
+- fileservice-api: A common library that includes microservice application names, URLs and method names to make easy client-server intagration
+- fileservice-client: Microservice feign client. It also has its own REST service. The RSET service behaves as proxy between feign client to fileservice-server 
+- fileservice-server: The microservice that can be used as scaled. It is creates a folder `uploads` and all container use the same folder as file system.
+- fileservice-discovery: Eureka discovery server
+
 ## microservices
 
 File Service Overview:
